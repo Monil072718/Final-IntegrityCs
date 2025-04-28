@@ -128,15 +128,16 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">123 Engineering Blvd, Suite 456, Metro City, MC 12345</span>
+                <span className="text-muted-foreground">461, Laxmi Enclave 2, Opp. Gajera School, Katargam, Surat. 395004</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-primary shrink-0" />
-                <span className="text-muted-foreground">+1 (555) 123-4567</span>
+                <span className="text-muted-foreground">+91 9974606135
+                +91 98982 29152</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
-                <span className="text-muted-foreground">info@buildmaster.com</span>
+                <span className="text-muted-foreground">integrityconsultancy01@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -144,7 +145,7 @@ export default function Footer() {
 
         <div className="border-t mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} BuildMaster Engineering. All rights reserved.
+            © {new Date().getFullYear()} Integrity Consulatancy & Services. All rights reserved.
           </p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link href="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">

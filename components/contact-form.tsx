@@ -53,7 +53,13 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <p className="text-muted-foreground">info@buildmaster.com</p>
+                  <p
+                    className="text-muted-foreground cursor-pointer"
+                    onClick={() => window.location.href = "mailto:integrityconsultancy01@gmail.com"}
+                  >
+                    integrityconsultancy01@gmail.com
+                  </p>
+
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -62,7 +68,13 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p
+                    className="text-muted-foreground cursor-pointer"
+                    onClick={() => window.location.href = "tel:+919974606135"}
+                  >
+                    +91 9974606135 / +91 9898229152
+                  </p>
+
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -72,9 +84,9 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium">Office</h4>
                   <p className="text-muted-foreground">
-                    123 Engineering Blvd, <br />
-                    Suite 456, <br />
-                    Metro City, MC 12345
+                    461, Laxmi Enclave 2,  <br />
+                    Opp. Gajera School, <br />
+                    Katargam, Surat. 395004
                   </p>
                 </div>
               </div>

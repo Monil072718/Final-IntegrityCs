@@ -12,14 +12,15 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 mb-16">
           <div className="lg:col-span-3">
             <div className="bg-card p-8 rounded-lg border h-full">
               <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
               <ContactForm />
             </div>
           </div>
-          <div className="lg:col-span-2">
+        </div>
+          {/* <div className="lg:col-span-2">
             <div className="bg-card p-8 rounded-lg border h-full">
               <h2 className="text-2xl font-bold mb-6">Our Offices</h2>
 
@@ -83,8 +84,7 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
 
         <div className="rounded-lg overflow-hidden h-[400px] relative">
           <div className="absolute inset-0 bg-black/10 pointer-events-none z-10 flex items-center justify-center">
@@ -93,18 +93,15 @@ export default function ContactPage() {
               <p className="text-muted-foreground mb-4">
                 We'd love to meet you in person to discuss your project needs.
               </p>
-              <p className="font-medium">123 Engineering Blvd, Suite 456, Metro City, MC 12345</p>
+              <p className="font-medium">461, Laxmi Enclave 2, Opp. Gajera School, Katargam, Surat. 395004</p>
             </div>
           </div>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007%2C%20USA!5e0!3m2!1sen!2sus!4v1580331106806!5m2!1sen!2sus"
-            width="100%"
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.991892671654!2d72.83407277584514!3d21.232170080760067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04faadc8e6dc1%3A0x5e3eaf3bf2dd54e4!2sINTEGRITY%20CONSULTANCY%20SERVICES!5e0!3m2!1sen!2sin!4v1745849264679!5m2!1sen!2sin" width="100%"
             height="100%"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+            referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

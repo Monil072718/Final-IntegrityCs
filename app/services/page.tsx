@@ -247,7 +247,7 @@ export default function ServicesPage() {
       </div>
 
       <div className="container">
-        <div className="flex justify-center mb-12">
+        {/* <div className="flex justify-center mb-12">
           <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -257,7 +257,7 @@ export default function ServicesPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
@@ -313,10 +313,11 @@ export default function ServicesPage() {
         </div>
 
         <div className="mt-20 bg-muted/30 rounded-lg p-8 md:p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Need a Custom Solution?</h2>
+          <h2 className="text-3xl font-bold mb-4">Bring Your Vision to Life</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Our team of experts is ready to help you with your specific project requirements. Contact us today to
-            discuss your needs.
+          Ready to turn your ideas into powerful solutions? Our expert team builds customized strategies designed for your success. Let's create something amazing together.
+
+
           </p>
           <Link href="/contact">
             <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-md">
