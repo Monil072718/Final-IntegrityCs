@@ -1,0 +1,266 @@
+"use client"
+
+import { useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { ArrowRight, Calendar, MapPin, Award } from "lucide-react"
+
+// This would typically come from a database or API
+const allProjects = [
+  // Running Projects
+  {
+    id: "office-complex",
+    title: "Modern Office Complex",
+    description: "A state-of-the-art office building with sustainable features and innovative design.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Commercial",
+    status: "running",
+    progress: 75,
+    location: "Downtown Metro",
+    startDate: "March 2023",
+    endDate: "Expected December 2024",
+    link: "/projects/office-complex",
+  },
+  {
+    id: "highway-bridge",
+    title: "Highway Bridge Construction",
+    description: "Reinforced concrete bridge spanning 1.2km with advanced structural engineering.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Infrastructure",
+    status: "running",
+    progress: 60,
+    location: "River Valley",
+    startDate: "January 2023",
+    endDate: "Expected October 2024",
+    link: "/projects/highway-bridge",
+  },
+  {
+    id: "residential-tower",
+    title: "Residential Tower",
+    description: "Luxury residential tower with 45 floors featuring modern amenities and earthquake-resistant design.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Residential",
+    status: "running",
+    progress: 40,
+    location: "Coastal Heights",
+    startDate: "June 2023",
+    endDate: "Expected July 2025",
+    link: "/projects/residential-tower",
+  },
+
+  // Completed Projects
+  {
+    id: "commercial-tower",
+    title: "Commercial Tower",
+    description: "A 35-story commercial tower with state-of-the-art facilities and sustainable design.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Commercial",
+    status: "completed",
+    completionDate: "December 2022",
+    location: "Downtown Metro",
+    awards: ["Best Commercial Design 2022", "Sustainability Excellence Award"],
+    link: "/projects/completed/commercial-tower",
+  },
+  {
+    id: "highway-bridge-completed",
+    title: "Highway Bridge",
+    description: "A 1.2km reinforced concrete bridge connecting two major highways.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Infrastructure",
+    status: "completed",
+    completionDate: "August 2021",
+    location: "River Valley",
+    awards: ["Engineering Excellence Award"],
+    link: "/projects/completed/highway-bridge",
+  },
+  {
+    id: "residential-complex",
+    title: "Luxury Residential Complex",
+    description: "A complex of 5 residential buildings with 250 premium apartments and amenities.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Residential",
+    status: "completed",
+    completionDate: "March 2023",
+    location: "Coastal Heights",
+    awards: ["Best Residential Project 2023"],
+    link: "/projects/completed/residential-complex",
+  },
+  {
+    id: "shopping-mall",
+    title: "Metro Shopping Mall",
+    description: "A modern shopping mall with 150 retail spaces, food court, and entertainment zones.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Commercial",
+    status: "completed",
+    completionDate: "November 2022",
+    location: "City Center",
+    awards: [],
+    link: "/projects/completed/shopping-mall",
+  },
+  {
+    id: "hospital-building",
+    title: "General Hospital",
+    description: "A modern 500-bed hospital with specialized medical facilities and emergency services.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "Healthcare",
+    status: "completed",
+    completionDate: "June 2021",
+    location: "North District",
+    awards: ["Healthcare Design Excellence"],
+    link: "/projects/completed/hospital-building",
+  },
+]
+
+// Categories for filtering
+const categories = ["All", "Commercial", "Residential", "Infrastructure", "Healthcare", "Educational", "Industrial"]
+const statuses = ["All", "Running", "Completed"]
+
+export default function ProjectsPage() {
+  const [activeCategory, setActiveCategory] = useState("All")
+  const [activeStatus, setActiveStatus] = useState("All")
+
+  const filteredProjects = allProjects.filter((project) => {
+    const matchesCategory = activeCategory === "All" || project.category === activeCategory
+    const matchesStatus = activeStatus === "All" || project.status === activeStatus.toLowerCase()
+    return matchesCategory && matchesStatus
+  })
+
+  return (
+    <div className="pt-24 pb-16">
+      <div
+        className="relative bg-cover bg-center py-20 mb-12"
+        style={{
+          backgroundImage: 'url("/placeholder.svg?height=1080&width=1920")',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Projects</h1>
+          <p className="text-white/80 max-w-2xl mx-auto">
+            Explore our portfolio of running and completed projects showcasing our expertise in civil engineering and
+            construction.
+          </p>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+          <div className="flex flex-wrap justify-center gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={category === activeCategory ? "default" : "outline"}
+                className="mb-2 transition-all duration-300 hover:shadow-md"
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {statuses.map((status) => (
+              <Button
+                key={status}
+                variant={status === activeStatus ? "default" : "outline"}
+                className="mb-2 transition-all duration-300 hover:shadow-md"
+                onClick={() => setActiveStatus(status)}
+              >
+                {status}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project) => (
+              <Card
+                key={project.id}
+                className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px]"
+              >
+                <div className="relative h-60 overflow-hidden">
+                  <Badge className="absolute top-4 left-4 z-10">{project.category}</Badge>
+                  <Badge
+                    variant={project.status === "running" ? "secondary" : "default"}
+                    className="absolute top-4 right-4 z-10"
+                  >
+                    {project.status === "running" ? "In Progress" : "Completed"}
+                  </Badge>
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center text-sm">
+                      <MapPin className="h-4 w-4 mr-2 text-primary" />
+                      <span>{project.location}</span>
+                    </div>
+
+                    {project.status === "running" ? (
+                      <>
+                        <div className="flex items-center text-sm">
+                          <Calendar className="h-4 w-4 mr-2 text-primary" />
+                          <span>
+                            Timeline: {project.startDate} - {project.endDate}
+                          </span>
+                        </div>
+                        <div className="w-full bg-muted rounded-full h-2 mt-2">
+                          <div className="bg-primary h-2 rounded-full" style={{ width: `${project.progress}%` }} />
+                        </div>
+                        <div className="text-right text-sm font-medium text-primary">{project.progress}% Complete</div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex items-center text-sm">
+                          <Calendar className="h-4 w-4 mr-2 text-primary" />
+                          <span>Completed: {project.completionDate}</span>
+                        </div>
+                        {project.awards && project.awards.length > 0 && (
+                          <div className="flex items-center text-sm">
+                            <Award className="h-4 w-4 mr-2 text-primary" />
+                            <span>{project.awards[0]}</span>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  <Link href={project.link}>
+                    <Button className="w-full group transition-all duration-300 hover:shadow-md">
+                      View Details
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <h3 className="text-xl font-bold mb-2">No projects found</h3>
+            <p className="text-muted-foreground mb-4">Try adjusting your filter criteria</p>
+            <Button
+              onClick={() => {
+                setActiveCategory("All")
+                setActiveStatus("All")
+              }}
+              className="transition-all duration-300 hover:scale-105"
+            >
+              Reset Filters
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
