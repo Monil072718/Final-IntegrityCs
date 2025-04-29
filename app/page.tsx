@@ -1,8 +1,7 @@
 import HeroSlider from "@/components/hero-slider"
 import About from "@/components/about"
 import ProjectCounter from "@/components/project-counter"
-import RunningProjects from "@/components/running-projects"
-import CompletedProjects from "@/components/completed-projects"
+import OurProjects from "@/components/our-projects"
 import ServicesSection from "@/components/services-section"
 import ConstructionTimeline from "@/components/construction-timeline"
 import BlogSection from "@/components/blog-section"
@@ -17,8 +16,7 @@ export default function Home() {
       <HeroSlider />
       <About />
       <ProjectCounter />
-      <RunningProjects />
-      <CompletedProjects />
+      <OurProjects />
       <ServicesSection />
       <ConstructionTimeline />
       <Gallery />
