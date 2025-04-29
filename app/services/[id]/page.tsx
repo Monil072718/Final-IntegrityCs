@@ -214,6 +214,19 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
 
   return (
     <div className="pt-24 pb-16">
+      <div
+        className="relative bg-cover bg-center py-20 mb-12"
+        style={{
+          backgroundImage: 'url("/placeholder.svg?height=1080&width=1920")',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="container relative z-10">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">{service.title}</h1>
+          <p className="text-white/80 max-w-2xl">{service.description}</p>
+        </div>
+      </div>
+
       <div className="container">
         <Link href="/services">
           <Button variant="ghost" className="mb-6 pl-0 transition-all duration-300 hover:pl-2">
@@ -228,29 +241,9 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative h-[400px] rounded-lg overflow-hidden"
-            >
-              <Image
-                src={service.image || "/placeholder.svg"}
-                alt={service.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{service.title}</h1>
-              <p className="text-muted-foreground mb-6 text-lg">{service.description}</p>
-              <div
-                className="prose dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: service.fullDescription }}
-              />
-            </motion.div>
+              className="prose dark:prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: service.fullDescription }}
+            />
 
             {service.projects && service.projects.length > 0 && (
               <motion.div
@@ -262,7 +255,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {service.projects.map((project: any, index: number) => (
                     <Link key={index} href={project.link} className="group">
-                      <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                      <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                         <div className="relative h-48 overflow-hidden">
                           <Image
                             src={project.image || "/placeholder.svg"}
