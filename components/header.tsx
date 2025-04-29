@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
@@ -19,18 +19,19 @@ const navItems = [
 ]
 
 export default function Header() {
+  // Remove the lastScrollY state since we're using a ref instead
   const [isScrolled, setIsScrolled] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [isHidden, setIsHidden] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
       // Determine if scrolling up or down
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsHidden(true)
       } else {
         setIsHidden(false)
@@ -39,20 +40,25 @@ export default function Header() {
       // Set scrolled state for styling
       setIsScrolled(currentScrollY > 10)
 
-      // Update last scroll position
-      setLastScrollY(currentScrollY)
+      // Update last scroll position in state
+      lastScrollY.current = currentScrollY
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
+
+    // Initialize on mount
+    setIsScrolled(window.scrollY > 10)
+    lastScrollY.current = window.scrollY
+
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled ? "bg-background/95 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4",
-        isHidden ? "-translate-y-full" : "translate-y-0",
+        isHidden && !mobileMenuOpen ? "-translate-y-full" : "translate-y-0",
       )}
     >
       <div className="container flex items-center justify-between">
