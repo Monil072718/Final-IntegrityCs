@@ -170,47 +170,52 @@ export default function ServicesSection() {
   })
 
   return (
-    <section className="py-16 container" id="services">
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-        <p className="text-muted-foreground">
-          We offer a comprehensive range of civil engineering services to meet all your project needs.
-        </p>
-      </div>
+    <section className="py-16 bg-pattern-dots" id="services">
+      <div className="container">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <p className="text-muted-foreground">
+            We offer a comprehensive range of civil engineering services to meet all your project needs.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={ref}>
-        {services.map((service, index) => (
-          <Card
-            key={service.id}
-            className={`border-none shadow-lg hover:shadow-xl transition-all duration-500 ${
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-            style={{ transitionDelay: `${index * 100}ms` }}
-          >
-            <CardContent className="p-6">
-              <div className="bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-muted-foreground mb-6">{service.description}</p>
-              <Link href={service.link}>
-                <Button variant="outline" className="group">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={ref}>
+          {services.map((service, index) => (
+            <Card
+              key={service.id}
+              className={`border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <CardContent className="p-6 flex flex-col h-full">
+                <div className="bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground mb-6 flex-grow">{service.description}</p>
+                <Link href={service.link} className="mt-auto">
+                  <Button
+                    variant="outline"
+                    className="group hover:bg-primary hover:text-primary-foreground transition-all duration-300 w-full"
+                  >
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-      <div className="text-center mt-12">
-        <Link href="/services">
-          <Button size="lg">
-            View All Services
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </Link>
+        <div className="text-center mt-12">
+          <Link href="/services">
+            <Button size="lg" className="hover:scale-105 transition-transform duration-300">
+              View All Services
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   )
