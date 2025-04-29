@@ -4,8 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-const categories = ["All", "Commercial", "Residential", "Infrastructure", "Industrial", "Planning"]
-
 const galleryItems = [
   {
     id: 1,
@@ -73,11 +71,7 @@ const galleryItems = [
 ]
 
 export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState("All")
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
-
-  const filteredItems =
-    activeCategory === "All" ? galleryItems : galleryItems.filter((item) => item.category === activeCategory)
 
   return (
     <div className="pt-24 pb-16">
@@ -90,21 +84,8 @@ export default function GalleryPage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={category === activeCategory ? "default" : "outline"}
-              className="mb-2"
-              onClick={() => setActiveCategory(category)}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => (
+          {galleryItems.map((item) => (
             <div
               key={item.id}
               className="group relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
