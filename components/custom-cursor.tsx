@@ -159,21 +159,16 @@ export default function CustomCursor() {
   return (
     <>
       {/* Main cursor dot */}
-      <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
+      <div className={`fixed pointer-events-none z-[9999] transition-opacity duration-300 ${
           isHidden ? "opacity-0" : "opacity-100"
-        }`}
-        style={{
+        }`} style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           transform: "translate(-50%, -50%)",
-        }}
-      >
-        <div
-          className={`relative rounded-full mix-blend-difference transition-all duration-150 ${
+        }}>
+        <div className={`relative rounded-full mix-blend-difference transition-all duration-150 ${
             isPointer ? "bg-white w-5 h-5 scale-150" : "bg-white w-3 h-3"
-          } ${isClicking ? "scale-75" : ""}`}
-        />
+          } ${isClicking ? "scale-75" : ""}`}/>
       </div>
 
       {/* Circular follower */}

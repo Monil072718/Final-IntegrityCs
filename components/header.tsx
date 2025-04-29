@@ -19,7 +19,6 @@ const navItems = [
 ]
 
 export default function Header() {
-  // Remove the lastScrollY state since we're using a ref instead
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -30,23 +29,17 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
-      // Determine if scrolling up or down
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsHidden(true)
       } else {
         setIsHidden(false)
       }
 
-      // Set scrolled state for styling
       setIsScrolled(currentScrollY > 10)
-
-      // Update last scroll position in state
       lastScrollY.current = currentScrollY
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-
-    // Initialize on mount
     setIsScrolled(window.scrollY > 10)
     lastScrollY.current = window.scrollY
 
@@ -88,12 +81,14 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </Link>
           ))}
-          <ThemeToggle />
-          <Link href="/contact#quote">
-            <Button size="sm" className="ml-4 transition-all duration-300 hover:scale-105 hover:shadow-md">
-              Get Quote
-            </Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Link href="/contact#quote">
+              <Button size="sm" className="ml-4 transition-all duration-300 hover:scale-105 hover:shadow-md">
+                Get Quote
+              </Button>
+            </Link>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
