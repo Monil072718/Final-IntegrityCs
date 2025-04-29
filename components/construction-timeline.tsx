@@ -196,6 +196,8 @@ export default function ConstructionTimeline() {
           setDirection(targetStep > activeStep ? 1 : -1)
           setActiveStep(targetStep)
         }
+        setDirection(targetStep > activeStep ? 1 : -1)
+        setActiveStep(targetStep)
       }
     }
 
@@ -214,7 +216,7 @@ export default function ConstructionTimeline() {
         </div>
 
         <div className="relative">
-          {/* Timeline Bar */}
+          {/* Timeline Bar - Hidden on Mobile */}
           <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-muted -translate-y-1/2 z-0">
             <div
               className="h-full bg-primary transition-all duration-500"
@@ -222,7 +224,7 @@ export default function ConstructionTimeline() {
             />
           </div>
 
-          {/* Timeline Steps */}
+          {/* Timeline Steps - Desktop Only */}
           <div className="hidden md:flex justify-between mb-12 relative z-10">
             {timelineSteps.map((step) => (
               <div
@@ -250,13 +252,13 @@ export default function ConstructionTimeline() {
             ))}
           </div>
 
-          {/* Mobile Timeline */}
-          <div className="md:hidden flex justify-between mb-6">
+          {/* Mobile Timeline Navigation */}
+          <div className="md:hidden flex justify-between items-center mb-6 bg-card p-4 rounded-lg shadow-sm">
             <Button variant="outline" size="sm" onClick={prevStep} disabled={activeStep === 1}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <div className="text-center">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-muted-foreground block">
                 Step {activeStep} of {timelineSteps.length}
               </span>
               <h3 className="font-bold">{timelineSteps[activeStep - 1].title}</h3>
@@ -267,7 +269,7 @@ export default function ConstructionTimeline() {
           </div>
 
           {/* Content */}
-          <div className="relative h-[300px] md:h-[400px] overflow-hidden">
+          <div className="relative min-h-[300px] md:min-h-[400px] overflow-hidden">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={activeStep}
@@ -279,12 +281,14 @@ export default function ConstructionTimeline() {
                 className="absolute inset-0"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-                  <div className="flex flex-col justify-center">
-                    <div className="bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                  <div className="flex flex-col justify-center timeline-step">
+                    <div className="bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 timeline-icon">
                       {timelineSteps[activeStep - 1].icon}
                     </div>
                     <h3 className="text-2xl font-bold mb-4">{timelineSteps[activeStep - 1].title}</h3>
-                    <p className="text-muted-foreground">{timelineSteps[activeStep - 1].description}</p>
+                    <p className="text-muted-foreground timeline-content">
+                      {timelineSteps[activeStep - 1].description}
+                    </p>
                   </div>
                   <div className="flex items-center justify-center">
                     <div className="relative w-full h-full max-h-[300px] perspective-1000">
@@ -318,6 +322,19 @@ export default function ConstructionTimeline() {
               Next
               <ChevronRight className="h-4 w-4 ml-2" />
             </Button>
+          </div>
+
+          {/* Mobile Step Indicators */}
+          <div className="flex justify-center mt-6 gap-2 md:hidden">
+            {timelineSteps.map((step) => (
+              <div
+                key={step.id}
+                onClick={() => handleStepClick(step.id)}
+                className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
+                  step.id === activeStep ? "w-6 bg-primary" : "bg-muted"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
