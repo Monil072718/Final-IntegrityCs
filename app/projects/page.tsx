@@ -8,9 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, MapPin, Award } from "lucide-react"
 
-// This would typically come from a database or API
 const allProjects = [
-  // Running Projects
   {
     id: "office-complex",
     title: "Modern Office Complex",
@@ -50,8 +48,6 @@ const allProjects = [
     endDate: "Expected July 2025",
     link: "/projects/residential-tower",
   },
-
-  // Completed Projects
   {
     id: "commercial-tower",
     title: "Commercial Tower",
@@ -88,44 +84,15 @@ const allProjects = [
     awards: ["Best Residential Project 2023"],
     link: "/projects/completed/residential-complex",
   },
-  {
-    id: "shopping-mall",
-    title: "Metro Shopping Mall",
-    description: "A modern shopping mall with 150 retail spaces, food court, and entertainment zones.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "Commercial",
-    status: "completed",
-    completionDate: "November 2022",
-    location: "City Center",
-    awards: [],
-    link: "/projects/completed/shopping-mall",
-  },
-  {
-    id: "hospital-building",
-    title: "General Hospital",
-    description: "A modern 500-bed hospital with specialized medical facilities and emergency services.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "Healthcare",
-    status: "completed",
-    completionDate: "June 2021",
-    location: "North District",
-    awards: ["Healthcare Design Excellence"],
-    link: "/projects/completed/hospital-building",
-  },
 ]
 
-// Categories for filtering
 const categories = ["All", "Commercial", "Residential", "Infrastructure", "Healthcare", "Educational", "Industrial"]
-const statuses = ["All", "Running", "Completed"]
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All")
-  const [activeStatus, setActiveStatus] = useState("All")
 
   const filteredProjects = allProjects.filter((project) => {
-    const matchesCategory = activeCategory === "All" || project.category === activeCategory
-    const matchesStatus = activeStatus === "All" || project.status === activeStatus.toLowerCase()
-    return matchesCategory && matchesStatus
+    return activeCategory === "All" || project.category === activeCategory
   })
 
   return (
@@ -140,48 +107,33 @@ export default function ProjectsPage() {
         <div className="container relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Projects</h1>
           <p className="text-white/80 max-w-2xl mx-auto">
-            Explore our portfolio of running and completed projects showcasing our expertise in civil engineering and
-            construction.
+            Explore our portfolio of projects showcasing our expertise in civil engineering and construction.
           </p>
         </div>
       </div>
 
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-          <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={category === activeCategory ? "default" : "outline"}
-                className="mb-2 transition-all duration-300 hover:shadow-md"
-                onClick={() => setActiveCategory(category)}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-2">
-            {statuses.map((status) => (
-              <Button
-                key={status}
-                variant={status === activeStatus ? "default" : "outline"}
-                className="mb-2 transition-all duration-300 hover:shadow-md"
-                onClick={() => setActiveStatus(status)}
-              >
-                {status}
-              </Button>
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={category === activeCategory ? "default" : "outline"}
+              className="mb-2 transition-all duration-300 hover:shadow-md"
+              onClick={() => setActiveCategory(category)}
+            >
+              {category}
+            </Button>
+          ))}
         </div>
 
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {filteredProjects.map((project) => (
               <Card
                 key={project.id}
                 className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px]"
               >
-                <div className="relative h-60 overflow-hidden">
+                <div className="relative h-64 overflow-hidden">
                   <Badge className="absolute top-4 left-4 z-10">{project.category}</Badge>
                   <Badge
                     variant={project.status === "running" ? "secondary" : "default"}
@@ -214,10 +166,7 @@ export default function ProjectsPage() {
                             Timeline: {project.startDate} - {project.endDate}
                           </span>
                         </div>
-                        <div className="w-full bg-muted rounded-full h-2 mt-2">
-                          <div className="bg-primary h-2 rounded-full" style={{ width: `${project.progress}%` }} />
-                        </div>
-                        <div className="text-right text-sm font-medium text-primary">{project.progress}% Complete</div>
+                     
                       </>
                     ) : (
                       <>
@@ -250,10 +199,7 @@ export default function ProjectsPage() {
             <h3 className="text-xl font-bold mb-2">No projects found</h3>
             <p className="text-muted-foreground mb-4">Try adjusting your filter criteria</p>
             <Button
-              onClick={() => {
-                setActiveCategory("All")
-                setActiveStatus("All")
-              }}
+              onClick={() => setActiveCategory("All")}
               className="transition-all duration-300 hover:scale-105"
             >
               Reset Filters
