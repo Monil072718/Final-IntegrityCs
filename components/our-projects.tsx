@@ -15,10 +15,8 @@ const projects = [
     id: "office-complex",
     title: "Modern Office Complex",
     description: "A state-of-the-art office building with sustainable features and innovative design.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/Moder_office.webp",
     category: "Commercial",
-    status: "In Progress",
-    progress: 75,
     location: "Downtown Metro",
     date: "Expected completion: December 2024",
     link: "/projects/office-complex",
@@ -27,10 +25,8 @@ const projects = [
     id: "highway-bridge",
     title: "Highway Bridge Construction",
     description: "Reinforced concrete bridge spanning 1.2km with advanced structural engineering.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/bridge construction.webp",
     category: "Infrastructure",
-    status: "In Progress",
-    progress: 60,
     location: "River Valley",
     date: "Expected completion: October 2024",
     link: "/projects/highway-bridge",
@@ -39,9 +35,8 @@ const projects = [
     id: "commercial-tower",
     title: "Commercial Tower",
     description: "A 35-story commercial tower with state-of-the-art facilities and sustainable design.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/commercial.webp",
     category: "Commercial",
-    status: "Completed",
     location: "Downtown Metro",
     date: "Completed: December 2022",
     link: "/projects/completed/commercial-tower",
@@ -50,9 +45,8 @@ const projects = [
     id: "residential-complex",
     title: "Luxury Residential Complex",
     description: "A complex of 5 residential buildings with 250 premium apartments and amenities.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/luxery.webp",
     category: "Residential",
-    status: "Completed",
     location: "Coastal Heights",
     date: "Completed: March 2023",
     link: "/projects/completed/residential-complex",
@@ -104,12 +98,6 @@ export default function OurProjects() {
           >
             <div className="relative h-60 overflow-hidden">
               <Badge className="absolute top-4 left-4 z-10">{project.category}</Badge>
-              <Badge
-                variant={project.status === "In Progress" ? "secondary" : "default"}
-                className="absolute top-4 right-4 z-10"
-              >
-                {project.status}
-              </Badge>
               <Image
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
@@ -130,24 +118,14 @@ export default function OurProjects() {
                   <Calendar className="h-4 w-4 mr-2 text-primary" />
                   <span>{project.date}</span>
                 </div>
-
-                {project.status === "In Progress" && project.progress && (
-                  <div className="w-full mt-2">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span>Progress</span>
-                      <span className="font-medium">{project.progress}%</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-primary h-2 rounded-full" style={{ width: `${project.progress}%` }} />
-                    </div>
-                  </div>
-                )}
               </div>
 
-              <Link href={project.link}>
-                <Button className="w-full group">
-                  View Details
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <Link href={project.link} passHref>
+                <Button className="w-full group" asChild>
+                  <a>
+                    View Details
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
                 </Button>
               </Link>
             </CardContent>
@@ -156,10 +134,12 @@ export default function OurProjects() {
       </div>
 
       <div className="text-center mt-12">
-        <Link href="/projects">
-          <Button variant="outline" size="lg">
-            View All Projects
-            <ArrowRight className="ml-2 h-4 w-4" />
+        <Link href="/projects" passHref>
+          <Button variant="outline" size="lg" asChild>
+            <a>
+              View All Projects
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </Link>
       </div>

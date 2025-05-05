@@ -7,12 +7,10 @@ import ConstructionTimeline from "@/components/construction-timeline"
 import BlogSection from "@/components/blog-section"
 import Gallery from "@/components/gallery"
 import ContactForm from "@/components/contact-form"
-import BackgroundAnimation from "@/components/background-animation"
 
 export default function Home() {
   return (
     <div className="space-y-20 pb-20">
-      <BackgroundAnimation />
       <HeroSlider />
       <About />
       <ProjectCounter />

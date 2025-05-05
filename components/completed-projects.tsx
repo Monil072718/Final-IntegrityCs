@@ -110,10 +110,12 @@ export default function CompletedProjects() {
                 )}
               </div>
 
-              <Link href={project.link}>
-                <Button className="w-full group">
-                  View Details
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <Link href={project.link} passHref>
+                <Button className="w-full group" asChild>
+                  <a>
+                    View Details
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
                 </Button>
               </Link>
             </CardContent>
@@ -122,10 +124,12 @@ export default function CompletedProjects() {
       </div>
 
       <div className="text-center mt-12">
-        <Link href="/projects/completed">
-          <Button variant="outline" size="lg">
-            View All Completed Projects
-            <ArrowRight className="ml-2 h-4 w-4" />
+        <Link href="/projects/completed" passHref>
+          <Button variant="outline" size="lg" asChild>
+            <a>
+              View All Completed Projects
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </Link>
       </div>

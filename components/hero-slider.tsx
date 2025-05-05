@@ -12,24 +12,25 @@ const slides = [
     id: 1,
     title: "Innovative Structural Design",
     description: "Pushing the boundaries of modern civil engineering with cutting-edge structural solutions",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/2.jpg",
     link: "/projects/structural-design",
   },
   {
     id: 2,
     title: "Sustainable Infrastructure",
     description: "Creating eco-friendly infrastructure that stands the test of time",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/mainbanner02.jpg",
     link: "/projects/sustainable-infrastructure",
   },
   {
     id: 3,
     title: "Urban Development",
     description: "Transforming urban landscapes with thoughtful and functional design",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/urban%20developement.jpg", // updated image path
     link: "/projects/urban-development",
   },
 ]
+
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0)

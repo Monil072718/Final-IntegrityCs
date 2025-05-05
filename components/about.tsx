@@ -126,7 +126,7 @@ export default function About() {
         <div className={`relative ${inView ? "animate-slide-up" : ""}`} style={{ animationDelay: "0.3s" }}>
           <div className="relative h-[500px] rounded-lg overflow-hidden">
             <Image
-              src="/placeholder.svg?height=1000&width=800"
+              src="/blog4.jpg"
               alt="About BuildMaster Engineering"
               fill
               className="object-cover"

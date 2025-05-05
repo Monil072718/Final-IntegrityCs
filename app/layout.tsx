@@ -7,13 +7,13 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import CustomCursor from "@/components/custom-cursor"
 import ScrollToTop from "@/components/scroll-to-top"
+// import ArchitecturalBackground from "@/components/architectural-background"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "BuildMaster Engineering",
   description: "Professional Civil Engineering Services",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -25,6 +25,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          {/* <ArchitecturalBackground /> */}
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
