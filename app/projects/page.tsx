@@ -13,10 +13,8 @@ const allProjects = [
     id: "office-complex",
     title: "Modern Office Complex",
     description: "A state-of-the-art office building with sustainable features and innovative design.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/Moder_office.webp",
     category: "Commercial",
-    status: "running",
-    progress: 75,
     location: "Downtown Metro",
     startDate: "March 2023",
     endDate: "Expected December 2024",
@@ -26,10 +24,8 @@ const allProjects = [
     id: "highway-bridge",
     title: "Highway Bridge Construction",
     description: "Reinforced concrete bridge spanning 1.2km with advanced structural engineering.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/bridge construction.webp",
     category: "Infrastructure",
-    status: "running",
-    progress: 60,
     location: "River Valley",
     startDate: "January 2023",
     endDate: "Expected October 2024",
@@ -39,10 +35,8 @@ const allProjects = [
     id: "residential-tower",
     title: "Residential Tower",
     description: "Luxury residential tower with 45 floors featuring modern amenities and earthquake-resistant design.",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/commercial.webp",
     category: "Residential",
-    status: "running",
-    progress: 40,
     location: "Coastal Heights",
     startDate: "June 2023",
     endDate: "Expected July 2025",
@@ -52,38 +46,13 @@ const allProjects = [
     id: "commercial-tower",
     title: "Commercial Tower",
     description: "A 35-story commercial tower with state-of-the-art facilities and sustainable design.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "Commercial",
-    status: "completed",
+    image: "/luxery.webp",
     completionDate: "December 2022",
     location: "Downtown Metro",
     awards: ["Best Commercial Design 2022", "Sustainability Excellence Award"],
     link: "/projects/completed/commercial-tower",
   },
-  {
-    id: "highway-bridge-completed",
-    title: "Highway Bridge",
-    description: "A 1.2km reinforced concrete bridge connecting two major highways.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "Infrastructure",
-    status: "completed",
-    completionDate: "August 2021",
-    location: "River Valley",
-    awards: ["Engineering Excellence Award"],
-    link: "/projects/completed/highway-bridge",
-  },
-  {
-    id: "residential-complex",
-    title: "Luxury Residential Complex",
-    description: "A complex of 5 residential buildings with 250 premium apartments and amenities.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "Residential",
-    status: "completed",
-    completionDate: "March 2023",
-    location: "Coastal Heights",
-    awards: ["Best Residential Project 2023"],
-    link: "/projects/completed/residential-complex",
-  },
+ 
 ]
 
 const categories = ["All", "Commercial", "Residential", "Infrastructure", "Healthcare", "Educational", "Industrial"]
@@ -135,12 +104,6 @@ export default function ProjectsPage() {
               >
                 <div className="relative h-64 overflow-hidden">
                   <Badge className="absolute top-4 left-4 z-10">{project.category}</Badge>
-                  <Badge
-                    variant={project.status === "running" ? "secondary" : "default"}
-                    className="absolute top-4 right-4 z-10"
-                  >
-                    {project.status === "running" ? "In Progress" : "Completed"}
-                  </Badge>
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
@@ -158,30 +121,6 @@ export default function ProjectsPage() {
                       <span>{project.location}</span>
                     </div>
 
-                    {project.status === "running" ? (
-                      <>
-                        <div className="flex items-center text-sm">
-                          <Calendar className="h-4 w-4 mr-2 text-primary" />
-                          <span>
-                            Timeline: {project.startDate} - {project.endDate}
-                          </span>
-                        </div>
-                     
-                      </>
-                    ) : (
-                      <>
-                        <div className="flex items-center text-sm">
-                          <Calendar className="h-4 w-4 mr-2 text-primary" />
-                          <span>Completed: {project.completionDate}</span>
-                        </div>
-                        {project.awards && project.awards.length > 0 && (
-                          <div className="flex items-center text-sm">
-                            <Award className="h-4 w-4 mr-2 text-primary" />
-                            <span>{project.awards[0]}</span>
-                          </div>
-                        )}
-                      </>
-                    )}
                   </div>
 
                   <Link href={project.link}>

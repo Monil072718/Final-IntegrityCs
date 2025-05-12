@@ -122,8 +122,7 @@ export default function OurProjects() {
 
               <Link href={project.link} passHref>
                 <Button className="w-full group" asChild>
-                  <a>
-                    View Details
+                  <a> View Details
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </Button>

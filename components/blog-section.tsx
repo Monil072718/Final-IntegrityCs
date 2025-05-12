@@ -5,9 +5,10 @@ import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Calendar, User } from "lucide-react"
+import type { BlogPost } from "@/types/blog"
 
 // This would typically come from an API or CMS
-const blogPosts = [
+const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "Innovations in Structural Engineering",
@@ -40,6 +41,7 @@ const blogPosts = [
     category: "Infrastructure",
     slug: "advancements-bridge-construction",
   },
+
 ]
 
 export default function BlogSection() {
@@ -87,27 +89,21 @@ export default function BlogSection() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">{post.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`} passHref>
                   <Button
                     variant="outline"
                     className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    asChild
                   >
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <a>
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </a>
                   </Button>
                 </Link>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Link href="/blog">
-            <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-300">
-              View All Articles
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
         </div>
       </div>
     </section>

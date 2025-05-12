@@ -5,7 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import CustomCursor from "@/components/custom-cursor"
+// import CustomCursor from "@/components/custom-cursor"
 import ScrollToTop from "@/components/scroll-to-top"
 // import ArchitecturalBackground from "@/components/architectural-background"
 
@@ -31,7 +31,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-          <CustomCursor />
+          {/* <CustomCursor /> */}
           <ScrollToTop />
         </ThemeProvider>
       </body>
