@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
@@ -9,7 +9,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Calendar, MapPin } from "lucide-react"
 
-// This would typically come from a database or API
 const projects = [
   {
     id: "office-complex",
@@ -61,6 +60,13 @@ export default function OurProjects() {
     threshold: 0.1,
     triggerOnce: true,
   })
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) return null // Prevent hydration mismatch
 
   const filteredProjects =
     activeCategory === "All" ? projects : projects.filter((project) => project.category === activeCategory)
@@ -96,12 +102,13 @@ export default function OurProjects() {
             } hover:-translate-y-2`}
             style={{ transitionDelay: `${index * 150}ms` }}
           >
-            <div className="relative h-60 overflow-hidden">
+            <div className="relative h-60 w-full overflow-hidden">
               <Badge className="absolute top-4 left-4 z-10">{project.category}</Badge>
               <Image
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover transition-transform duration-500 hover:scale-105"
               />
             </div>
@@ -122,7 +129,7 @@ export default function OurProjects() {
 
               <Link href={project.link} passHref>
                 <Button className="w-full group" asChild>
-                  <a> View Details
+                  <a> View Details{" "}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </Button>

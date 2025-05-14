@@ -5,50 +5,16 @@ import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, Calendar, User } from "lucide-react"
-import type { BlogPost } from "@/types/blog"
-
-// This would typically come from an API or CMS
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: "Innovations in Structural Engineering",
-    excerpt:
-      "Exploring cutting-edge techniques and materials revolutionizing structural engineering in modern construction.",
-    image: "/placeholder.svg?height=600&width=800",
-    date: "May 15, 2023",
-    author: "John Smith",
-    category: "Structural Engineering",
-    slug: "innovations-structural-engineering",
-  },
-  {
-    id: 2,
-    title: "Sustainable Infrastructure Development",
-    excerpt: "How civil engineers are incorporating eco-friendly practices and materials in infrastructure projects.",
-    image: "/placeholder.svg?height=600&width=800",
-    date: "April 22, 2023",
-    author: "Sarah Johnson",
-    category: "Sustainability",
-    slug: "sustainable-infrastructure-development",
-  },
-  {
-    id: 3,
-    title: "Advancements in Bridge Construction",
-    excerpt:
-      "New methodologies and technologies transforming bridge design and construction in challenging environments.",
-    image: "/placeholder.svg?height=600&width=800",
-    date: "March 10, 2023",
-    author: "Michael Chen",
-    category: "Infrastructure",
-    slug: "advancements-bridge-construction",
-  },
-
-]
+import { blogPosts } from "@/lib/blog-data"
 
 export default function BlogSection() {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
+
+  // Only show the first 3 blog posts on the homepage
+  const displayedPosts = blogPosts.slice(0, 3)
 
   return (
     <section className="py-16 bg-pattern-grid" id="blog">
@@ -61,7 +27,7 @@ export default function BlogSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={ref}>
-          {blogPosts.map((post, index) => (
+          {displayedPosts.map((post, index) => (
             <Card
               key={post.id}
               className={`overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
@@ -85,25 +51,31 @@ export default function BlogSection() {
                   <Calendar className="h-4 w-4 mr-1" />
                   <span className="mr-4">{post.date}</span>
                   <User className="h-4 w-4 mr-1" />
-                  <span>{post.author}</span>
+                  <span>{post.author.name}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">{post.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
-                <Link href={`/blog/${post.slug}`} passHref>
+                <Link href={`/blog/${post.id}`}>
                   <Button
                     variant="outline"
                     className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                    asChild
                   >
-                    <a>
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    Read More
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="/blog">
+            <Button size="lg" className="group">
+              View All Articles
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

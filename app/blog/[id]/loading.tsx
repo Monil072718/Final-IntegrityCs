@@ -1,4 +1,4 @@
-export default function Loading() {
+ export default function Loading() {
   return (
     <div className="pt-24 pb-16 container">
       <div className="flex items-center justify-center py-20">
